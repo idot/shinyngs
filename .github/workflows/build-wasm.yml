@@ -20,6 +20,9 @@ jobs:
       - name: Install pak
         run: R -e "install.packages('pak')"
 
+      - name: Install gitcreds
+        run: R -e "install.packages('gitcreds')"
+        
       - name: Set up GitHub PAT
         run: R -e "gitcreds::gitcreds_set()"
         env:
