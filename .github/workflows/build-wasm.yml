@@ -46,8 +46,9 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v3
         if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop')
-  
-      environment:
-        name: github-pages
-        url: ${{ steps.deployment.outputs.page_url }}
+
+
+    environment:
+       name: github-pages
+       url: ${{ steps.deployment.outputs.page_url }}
   
