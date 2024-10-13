@@ -19,18 +19,10 @@ jobs:
 
       - name: Install pak
         run: R -e "install.packages('pak')"
-
-      - name: Install gitcreds
-        run: R -e "install.packages('gitcreds')"
-        
-      - name: Set up GitHub PAT
-        run: R -e "gitcreds::gitcreds_set()"
-        env:
-          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       
       - name: Install shinyngs package
         run: |
-          R -e "pak::pkg_install('github::yourusername/shinyngs')"
+          R -e "pak::pkg_install('github::idot/shinyngs')"
         env:
           GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
