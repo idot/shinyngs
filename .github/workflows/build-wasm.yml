@@ -22,21 +22,32 @@ jobs:
           repo-path: '_repo'
 
       - name: Upload WASM library
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: shinyngs-wasm-lib
           path: wasm-lib
 
       - name: Upload WASM repository
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: shinyngs-wasm-repo
           path: _repo
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop')
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+  
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v2
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: _repo
-          keep_files: false
+          path: '_repo'
+  
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v3
+        if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop')
+  
+      environment:
+        name: github-pages
+        url: ${{ steps.deployment.outputs.page_url }}
+  
