@@ -21,7 +21,7 @@ jobs:
           strip: "demo, doc, examples, help, html, include, tests, vignette"
           image-path: 'wasm-lib'
           repo-path: '_repo'
-          compress: true
+
 
       - name: Upload WASM library
         uses: actions/upload-artifact@v3
